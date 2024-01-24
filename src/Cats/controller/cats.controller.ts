@@ -23,6 +23,11 @@ export class CatsController {
   }
 
 
+  @Get()
+  findAll() {
+    return this.catService.findAll()
+  }
+
   @Get(':id')
   findOne(@Param('id', new DefaultValuePipe(0)) id: number) {
     return this.catService.findOne(id)

@@ -42,16 +42,14 @@ const ROUTES = [
       max: 10, // maximum number of items in cache,
       isGlobal : true
     }),
-    ConfigModule.forRoot(
-      {
+    ConfigModule.forRoot({
         envFilePath: process.env.NODE_ENV === 'PROD' ? '.env' : `${process.env.NODE_ENV}.env`, // custom env file path
         ignoreEnvFile: false, // disabling env varaible loading
         isGlobal: true,  // When you want to use ConfigModule in other modules, you'll need to import it (as is standard with any Nest module). Alternatively, declare it as a global module by setting the options object's isGlobal property to true, as shown below. In that case, you will not need to import ConfigModule in other modules once it's been loaded in the root module (e.g., AppModule).
         load : [configuration],  // The value assigned to the load property is an array, allowing you to load multiple configuration files (e.g. load: [databaseConfig, authConfig])
         cache: true,   // As accessing process.env can be slow, with this option to increase the performance of ConfigService#get method when it comes to variables stored in process.env
         expandVariables : true  // Enable environment variable expansion using the expandVariables property
-      },
-    ),
+    }),
     EventEmitterModule.forRoot({
       wildcard: false,           // set this to `true` to use wildcards
       delimiter: '.',            // the delimiter used to segment namespaces
@@ -67,7 +65,10 @@ const ROUTES = [
       inject : [ConfigService]
     }),
     RouterModule.register(ROUTES),
-    StoreModule.register({storeName : 'MY_STORE', storeType : 'REDIS'}),
+    StoreModule.register({
+      storeName : 'MY_STORE', 
+      storeType : 'REDIS'
+    }),
     CatModule,
     UserModule,
     ScheduleModule.forRoot(),

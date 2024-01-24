@@ -11,6 +11,10 @@ export class CatService implements ICatService {
       }
     }
     
+    findAll() {
+      return {message : `This will return all cats`};
+    }
+    
     findOne(id: number) {
       console.log("support email : ", process.env.SUPPORT_EMAIL)
       return `This action returns a #${id} cat`;
